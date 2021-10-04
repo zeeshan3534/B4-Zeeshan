@@ -1,1 +1,66 @@
-sd
+#Task 1
+.data
+a: .word 2
+b: .word 4
+.globl main
+.text
+Sum: #func name
+add t1 a1 a2
+ret
+main:
+lw a1 a #variable a
+lw a2 b #variable b
+jal Sum #jump to func
+mv a0 t1
+nop
+
+#Task 2
+.data
+a: .word 8 #starting range number
+b: .word 0 #temporary for procedure use
+c: .word 500 #stack pointer
+.globl main
+.text
+start:
+beqz a1 end
+addi a1 a1 -1
+mv s1 a1
+sw s1 0(sp) #storing the number in the stack reverse range.
+addi t1 t1 4
+addi sp sp 4
+j start
+end:
+ret
+main:
+lw a1 a #loading the value
+lw t1 b #loading the value
+lw sp c
+jal start#jump to the procedure
+sub sp sp t1
+nop
+
+#Task 3
+data
+a: .word 8 #upper limit
+b: .word 2 #lower limit 
+c: .word 2
+.globl main
+.text
+evenodd:
+beq a1 a2 end
+rem t0 a2 t1
+addi a2 a2 1
+beqz t0 jump
+add t2 x0 a2 #even number
+j evenodd
+jump:
+add t3 x0 a2 #odd number
+j evenodd
+end:
+ret
+main:
+lw a1 a #argument
+lw a2 b #argument
+lw t1 c
+jal evenodd #Procedure name
+nop
